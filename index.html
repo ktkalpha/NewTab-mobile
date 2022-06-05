@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap 5.2 beta -->
+    
+    <style>
+        input{
+            /* round corner */
+            border-radius: 10px;
+            /* border */
+            border: 1px solid #ccc;
+            /* padding */
+            padding: 5px;
+            /* font size */
+            font-size: 26px;
+            /* font family */
+            font-family: "나눔스퀘어라운드 Regular";
+        }
+        #todo{
+            font-size: 100%;
+        }
+        #search-bar {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #clock {
+            padding: 5px;
+            /* font size */
+            font-size: 150%;
+            /* font family */
+            font-family: "나눔스퀘어라운드 Regular";
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #date {
+            padding: 5px;
+            /* font size */
+            font-size: 100%;
+            /* font family */
+            font-family: "나눔스퀘어라운드 Regular";
+            position: absolute;
+            top: 41%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #urls {
+            padding: 5px;
+            /* font size */
+            /* font family */
+            font-family: "나눔스퀘어라운드 Regular";
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .dark-mode {
+            background-color: rgb(45, 46, 56);
+            color: white;
+        }
+
+        .switch-button {
+        position: relative;
+        display: inline-block;
+        width: 55px;
+        height: 30px;
+    }
+
+    .switch-button input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .onoff-switch {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius:20px;
+        background-color: gray;
+        box-shadow: inset 1px 5px 1px gray;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .onoff-switch:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: #fff;
+        -webkit-transition: .5s;
+        transition: .4s;
+        border-radius:20px;
+    }
+
+    .switch-button input:checked + .onoff-switch {
+        background-color: cadetblue;
+        box-shadow: inset 1px 5px 1px cadetblue;
+    }
+
+    .switch-button input:checked + .onoff-switch:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+    </style>
+
+    <title>My New Tab</title>
+</head>
+<body>
+    <!-- google search bar -->
+    <label class="switch-button">
+        <input id="checko" type="checkbox" onclick="DarkMode()"/>
+        <span class="onoff-switch"></span>
+    </label>
+    <br>
+    Dark Mode
+
+    <div id="search-bar">
+        <form action="https://www.google.com/search?" method="get" target="_blank">
+            <input type="text" name="q" id="textBoxSearch" placeholder="Search Google" />
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+
+    <div id="clock">
+        <h1>00:00:00</h1>
+    </div>
+    <div id="date">
+        <h1>0000.00.00 0요일</h1>
+    </div>
+    <div id="urls">
+        <a href="https://www.google.com">
+            <img height="64" width="64" src='google.png' href="google.com" />
+        </a>
+        <a href="https://www.github.com">
+           <img height="64" width="64" src='github.png' />
+        </a>
+        <a href="https://www.youtube.com">
+            <img height="64" width="64" src='youtube.png' />
+        </a>
+        <a href="https://www.reddit.com">
+            <img height="64" width="64" src='reddi.png' />
+        </a>
+        <a href="https://getbootstrap.com/">
+            <img height="64" width="64" src='bootstrap.png' />
+        </a>
+    </div>
+    <div id="todo" style="margin-top: 20vh;">
+        <div style="text-align: left    ;">
+            To do : <button style="border-radius: 10px;" onclick=newTodo()>➕</button></div>
+        <ul id="todo-list" style="margin: 0; text-align: left;">
+            <li>
+                chicky! <button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let todoList = document.getElementById("todo-list");
+        let todoLocal = localStorage.getItem("todo");
+        if(todoList == null || todoList == "" || todoList == "undefined"){
+            todoList.innerHTML = '<li>chicky! <button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button></li>';
+        }else{
+            todoList.innerHTML = todoLocal;
+        }
+        todoList.innerHTML = localStorage.getItem("todo");
+        let input = document.getElementById('textBoxSearch');
+        input.focus();
+        input.select();
+
+
+        let darkModeToggle = localStorage.getItem("darkMode");
+        const darkModeCheckbox = document.getElementById("checko");
+        if (darkModeToggle == "enabled") {
+            document.body.classList.add("dark-mode");
+            darkModeCheckbox.checked = true;
+        }else{
+            document.body.classList.remove("dark-mode");
+            darkModeToggle = "disabled";
+            darkModeCheckbox.checked = false;
+        }
+        function DarkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+            if (element.className === 'dark-mode'){
+                localStorage.setItem("darkMode", "enabled");
+            }else{
+                localStorage.setItem("darkMode", "disabled");
+            }
+            
+        }
+        
+        function newTodo(){
+            let newTodo = prompt('Add To do Name');
+            if (newTodo == null || newTodo == "" || newTodo == "undefined"){
+                
+            }else{
+                todoList.innerHTML += '<li>' + newTodo + '<button style="border-radius: 10px;" onclick="removeTodo(this)">❌</button></li>';
+                localStorage.setItem("todo", todoList.innerHTML);
+            }
+        }
+
+        function removeTodo(el){
+            let element = el;
+            element.parentNode.remove();
+            localStorage.setItem("todo", todoList.innerHTML);
+        }
+
+        function pad(d) {
+            return (d < 10) ? '0' + d.toString() : d.toString();
+        }
+        // clock
+        const days = ["월", "화", "수", "목", "금", "토", "일"];
+        const clock = document.getElementById('clock');
+        const date = document.getElementById('date');
+        function ClockAndDate(){
+            let now = new Date();
+            let time = {
+                h: now.getHours(),
+                m: now.getMinutes(),
+                s: now.getSeconds(),
+                y: now.getFullYear(),
+                mo: now.getMonth(),
+                d: now.getDate(),
+                w: now.getDay()
+            };
+            clock.innerHTML = '<h1>'+pad(time.h)+':'+pad(time.m)+':'+pad(time.s)+'</h1>';
+            date.innerHTML = '<h1>'+time.y+'.'+pad(time.mo+1)+'.'+pad(time.d)+' '+days[time.w]+'요일</h1>';
+        }
+        ClockAndDate();
+        setInterval(ClockAndDate, 1000);
+</script>
+</body>
+</html>
