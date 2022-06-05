@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 
     <!-- bootstrap 5.2 beta -->
     
     <style>
         input{
+            /* text-align: center; */
+            width: 60vw;
             /* round corner */
             border-radius: 10px;
             /* border */
@@ -16,48 +18,51 @@
             /* padding */
             padding: 5px;
             /* font size */
-            font-size: 26px;
+            font-size: 16px;
             /* font family */
             font-family: "나눔스퀘어라운드 Regular";
         }
         #todo{
+            text-align: center;
+            transform: translate(43vw, 50vh);
             font-size: 100%;
+            
         }
         #search-bar {
             position: absolute;
-            top: 55%;
-            left: 50%;
+            top: 53%;
+            left: 53vw;
             transform: translate(-50%,-50%);
         }
         #clock {
             padding: 5px;
             /* font size */
-            font-size: 150%;
+            font-size: 130%;
             /* font family */
             font-family: "나눔스퀘어라운드 Regular";
             position: absolute;
-            top: 48%;
+            top: 44%;
             left: 50%;
             transform: translate(-50%,-50%);
         }
         #date {
             padding: 5px;
             /* font size */
-            font-size: 100%;
+            font-size: 55%;
             /* font family */
             font-family: "나눔스퀘어라운드 Regular";
             position: absolute;
-            top: 41%;
+            top: 37%;
             left: 50%;
             transform: translate(-50%,-50%);
         }
         #urls {
-            padding: 5px;
+            padding: 0px;
             /* font size */
             /* font family */
             font-family: "나눔스퀘어라운드 Regular";
             position: absolute;
-            top: 65%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%,-50%);
         }
@@ -132,7 +137,7 @@
     <div id="search-bar">
         <form action="https://www.google.com/search?" method="get" target="_blank">
             <input type="text" name="q" id="textBoxSearch" placeholder="Search Google" />
-            <input type="submit" value="Search" />
+            <input style="" type="submit" value="Search" />
         </form>
     </div>
 
@@ -144,19 +149,19 @@
     </div>
     <div id="urls">
         <a href="https://www.google.com">
-            <img height="64" width="64" src='google.png' href="google.com" />
+            <img height="48" width="48" src='google.png' href="google.com" />
         </a>
         <a href="https://www.github.com">
-           <img height="64" width="64" src='github.png' />
+           <img height="48" width="48" src='github.png' />
         </a>
         <a href="https://www.youtube.com">
-            <img height="64" width="64" src='youtube.png' />
+            <img height="48" width="48" src='youtube.png' />
         </a>
         <a href="https://www.reddit.com">
-            <img height="64" width="64" src='reddi.png' />
+            <img height="48" width="48" src='reddi.png' />
         </a>
         <a href="https://getbootstrap.com/">
-            <img height="64" width="64" src='bootstrap.png' />
+            <img height="48" width="48" src='bootstrap.png' />
         </a>
     </div>
     <div id="todo" style="margin-top: 20vh;">
